@@ -11,7 +11,7 @@ datasource db {
 model Registro {
   id        Int      @id @default(autoincrement())
   titulo    String
-  foto      String
+  foto      String?
   area      String
   maquina   String
   tipo      String
