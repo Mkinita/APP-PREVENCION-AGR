@@ -10,7 +10,8 @@ app.prepare().then(() => {
   const server = express();
 
   // Sirve los archivos estáticos desde la carpeta "public"
-  server.use('/uploads', express.static(join(__dirname, 'public/uploads')));
+  server.use('/uploads', express.static(join(__dirname, '.next/public/uploads')));
+
 
 
   // Maneja todas las demás rutas usando Next.js
