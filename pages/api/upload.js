@@ -1,59 +1,59 @@
-import formidable from 'formidable';
-import fs from 'fs-extra';
-import { PrismaClient } from '@prisma/client';
+// import formidable from 'formidable';
+// import fs from 'fs-extra';
+// import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const form = new formidable.IncomingForm();
-    form.keepExtensions = true;
-    form.uploadDir = './public/uploads'; // Directorio donde se guardarán las fotos
+// export default async function handler(req, res) {
+//   if (req.method === 'POST') {
+//     const form = new formidable.IncomingForm();
+//     form.keepExtensions = true;
+//     form.uploadDir = './public/uploads'; // Directorio donde se guardarán las fotos
 
-    form.parse(req, async (err, fields, files) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Error al procesar la solicitud' });
-      }
+//     form.parse(req, async (err, fields, files) => {
+//       if (err) {
+//         console.error(err);
+//         return res.status(500).json({ error: 'Error al procesar la solicitud' });
+//       }
 
-      const { titulo } = fields;
-      const { area } = fields;
-      const { maquina } = fields;
-      const { tipo } = fields;
-      const { foto } = files;
+//       const { titulo } = fields;
+//       const { area } = fields;
+//       const { maquina } = fields;
+//       const { tipo } = fields;
+//       const { foto } = files;
 
-      try {
-        const { path, name } = foto;
-        const destination = `${form.uploadDir}/${name}`;
+//       try {
+//         const { path, name } = foto;
+//         const destination = `${form.uploadDir}/${name}`;
 
-        await fs.move(path, destination);
+//         await fs.move(path, destination);
 
-        await prisma.registro.create({
-          data: {
-            titulo,
-            area,
-            maquina,
-            tipo,
-            foto: name,
-          },
-        });
+//         await prisma.registro.create({
+//           data: {
+//             titulo,
+//             area,
+//             maquina,
+//             tipo,
+//             foto: name,
+//           },
+//         });
 
-        res.status(200).json({ message: 'Registro guardado correctamente' });
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error al guardar el registro' });
-      }
-    });
-  } else {
-    res.status(405).json({ error: 'Método no permitido' });
-  }
-}
+//         res.status(200).json({ message: 'Registro guardado correctamente' });
+//       } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: 'Error al guardar el registro' });
+//       }
+//     });
+//   } else {
+//     res.status(405).json({ error: 'Método no permitido' });
+//   }
+// }
 
 
 
@@ -100,4 +100,63 @@ export default async function handler(req, res) {
 //     res.status(405).json({ error: 'Método no permitido' });
 //   }
 // }
+
+
+
+
+
+import formidable from 'formidable';
+import fs from 'fs-extra';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const form = new formidable.IncomingForm();
+    form.keepExtensions = true;
+    form.uploadDir = './public/uploads'; // Directorio donde se guardarán las fotos
+
+    form.parse(req, async (err, fields, files) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Error al procesar la solicitud' });
+      }
+
+      const { titulo, area, maquina, tipo } = fields;
+      const { foto } = files;
+
+      try {
+        const { path, name } = foto;
+        const destination = `${form.uploadDir}/${name}`;
+
+        await fs.move(path, destination);
+
+        await prisma.registro.create({
+          data: {
+            titulo,
+            area,
+            maquina,
+            tipo,
+            foto: name,
+          },
+        });
+
+        res.status(200).json({ message: 'Registro guardado correctamente' });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al guardar el registro' });
+      }
+    });
+  } else {
+    res.status(405).json({ error: 'Método no permitido' });
+  }
+}
+
 
