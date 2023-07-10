@@ -1,14 +1,19 @@
-import multer from 'multer';
-import { join } from 'path';
+import multer from "multer";
+import path from "path"
+import {generarId} from "../helpers/tokens.js"
 
-// Configuración de Multer para guardar los archivos en "public/uploads"
 const storage = multer.diskStorage({
-  destination: join(process.cwd(), './public/uploads'),
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
+    destination: function(req,file,cd){
+        cd(null,'./public/uploads/')
+    },
+    filename:function(req,file,cd){
+        cd(null, generarId() + path.extname(file.originalname))   
+    }
+})
 
-const uploadMiddleware = multer({ storage });
 
-export default uploadMiddleware;
+
+const uploadMiddleware = multer({ storage })
+
+
+export default uploadMiddleware
