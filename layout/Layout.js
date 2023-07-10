@@ -24,7 +24,7 @@ export default function AdminLayout({ children, pagina }) {
   return (
     <>
       <Head>
-        <title>AGRIFOR - {pagina}</title>
+        <title>AGRIFOR -- {pagina}</title>
         <meta name="description" content="Prevencion" />
       </Head>
 
