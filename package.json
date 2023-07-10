@@ -5,11 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "concurrently \"npm run next\" \"node server.js\"",
-    "lint": "next lint",
-    "next": "next"
+    "start": "next start",
+    "lint": "next lint"
   },
-  
   "dependencies": {
     "@prisma/client": "^4.9.0",
     "autoprefixer": "10.4.14",
