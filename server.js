@@ -30,6 +30,14 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+
+const uploadDirectory = './uploads';
+
+// Verificar si la carpeta de carga existe, si no, crearla
+if (!fs.existsSync(uploadDirectory)) {
+  fs.mkdirSync(uploadDirectory);
+}
 
 const app = express();
 const port = 3000;
@@ -51,13 +59,9 @@ const upload = multer({ storage: storage });
 // Configuración de Express para servir archivos estáticos y analizar formularios
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use('/uploads', express.static('uploads'));
-
-// Ruta principal
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 
 // Ruta para manejar la carga de archivos
 app.post('/upload', upload.single('image'), (req, res) => {
@@ -72,6 +76,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
 app.listen(port, () => {
   console.log(`La aplicación está funcionando en http://localhost:${port}`);
 });
+
 
 
 

@@ -7,8 +7,8 @@ import axios from 'axios'
 
 const reporte = () => {
 
-    const fetcher = () => axios('/api/imagenes').then(datos => datos.data)
-    const { data, error, isLoading } = useSWR('/api/imagenes',fetcher,{refreshInterval: 100} )
+    const fetcher = () => axios('/api/reporte').then(datos => datos.data)
+    const { data, error, isLoading } = useSWR('/api/reporte',fetcher,{refreshInterval: 100} )
 
   return (
     <>

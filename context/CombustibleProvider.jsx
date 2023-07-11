@@ -12,6 +12,13 @@ const CombustibleProvider = ({children}) => {
 
     const [nombre, setNombre] = useState('')
     const [area, setArea] = useState('')
+    const [titulo, setTitulo] = useState('')
+    const [enlace, setEnlace] = useState('')
+    const [maquina, setMaquina] = useState('')
+    const [tipo, setTipo] = useState('')
+
+
+
 
     const AgregarArea = async (e) => {
         e.preventDefault()
@@ -56,6 +63,32 @@ const CombustibleProvider = ({children}) => {
 
         console.log('agregando orden')
     }
+
+
+    const AgregarReporte = async (e) => {
+        e.preventDefault()
+
+        try {
+           await axios.post('/api/reporte',{titulo,enlace,area,maquina,tipo})
+            // Resetear la app
+            setTitulo('')
+            setEnlace('')
+            setArea('')
+            setMaquina('')
+            setTipo('')
+            toast.success('Agregando ⏳')
+
+            setTimeout(() =>{
+                router.push('https://nuevo-imagen-production.up.railway.app')
+            },2000)
+
+        } catch (error) {
+            console.log(error)
+        }
+
+
+        console.log('agregando orden')
+    }
     
 
 
@@ -65,8 +98,13 @@ const CombustibleProvider = ({children}) => {
         value={{
             nombre,setNombre,
             area,setArea,
+            titulo,setTitulo,
+            enlace,setEnlace,
+            maquina,setMaquina,
+            tipo,setTipo,
             AgregarArea,
-            AgregarMaquina
+            AgregarMaquina,
+            AgregarReporte
         }}
         
         
