@@ -69,7 +69,7 @@ const CombustibleProvider = ({children}) => {
         e.preventDefault()
 
         try {
-           await axios.post('/api/reporte',{titulo,enlace,area,maquina,tipo})
+           await axios.post('/api/reportes',{titulo,enlace,area,maquina,tipo})
             // Resetear la app
             setTitulo('')
             setEnlace('')
