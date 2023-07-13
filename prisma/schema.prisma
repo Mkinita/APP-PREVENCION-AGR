@@ -39,4 +39,5 @@ model Reporte {
   maquina   String
   tipo      String
   createdAt DateTime @default(now())
+  estado Boolean  @default(false)
 }

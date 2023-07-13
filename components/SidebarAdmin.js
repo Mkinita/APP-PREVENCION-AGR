@@ -43,8 +43,8 @@ export const SidebarAdmin = () => {
 
     return (
 
-        <div class="px-3 py-4 overflow-y-auto rounded bg-white">
-            <ul class="space-y-2">
+        <div className="px-3 py-4 overflow-y-auto rounded bg-white">
+            <ul className="space-y-2">
 
 
                 <li>
@@ -62,14 +62,14 @@ export const SidebarAdmin = () => {
                         {isVisible4 && (
                             <div className="p-2 space-y-1">
 
-                                <Link href="/agregar-area" class="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
+                                <Link href="/agregar-area" className="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
                                     ➕
-                                    <span class="ml-3">Agregar</span>
+                                    <span className="ml-3">Agregar</span>
                                 </Link>
 
-                                <Link href="/listado-areas" class="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
+                                <Link href="/listado-areas" className="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
                                     📋
-                                    <span class="ml-3">listado</span>
+                                    <span className="ml-3">listado</span>
                                 </Link>
                         
                             </div>
@@ -99,29 +99,29 @@ export const SidebarAdmin = () => {
                         {isVisible1 && (
                             <div className="p-2 space-y-1">
 
-                                <Link href="/agregar-maquinas" class="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
+                                <Link href="/agregar-maquinas" className="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
                                     ➕
-                                    <span class="ml-3">Agregar</span>
+                                    <span className="ml-3">Agregar</span>
                                 </Link>
 
-                                <Link href="/listado-maquinas" class="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
+                                <Link href="/listado-maquinas" className="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
                                     📋
-                                    <span class="ml-3">Listado</span>
+                                    <span className="ml-3">Listado</span>
                                 </Link>
                             </div>
                         )}
                     </div>
                 </li>
                 <li>
-                    <Link href="/reporte" class="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
+                    <Link href="/reporte" className="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
                         🤳
-                        <span class="ml-3">Reportes</span>
+                        <span className="ml-3">Reportes</span>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/admin" class="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
+                    <Link href="/admin" className="flex items-center p-2 text-xs font-black text-black rounded-lg bg-lime-400 dark:text-black hover:bg-gray-100 dark:hover:bg-lime-500 uppercase">
                         🏠
-                        <span class="ml-3">Inicio</span>
+                        <span className="ml-3">Inicio</span>
                     </Link>
                 </li>
             </ul>
