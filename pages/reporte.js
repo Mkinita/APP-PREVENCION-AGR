@@ -25,6 +25,8 @@ const reporte = () => {
                 </div>
                 ):<p className='text-center'>No Hay Reportes Pendientes</p>}
         </div>
+
+        
     </LayoutAdmin>
     </>
   )
