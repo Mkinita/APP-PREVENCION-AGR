@@ -34,6 +34,25 @@ const admin = () => {
   }, [dataincidente]);
 
 
+  const [pendiente, setPendiente] = useState(0);
+  const fetcherpendiente = () => axios('/api/pendiente').then(datos => datos.data);
+  const { data:datapendiente, error:errorpendiente, isLoading:isLoadingpendiente } = useSWR('/api/pendiente', fetcherpendiente, { refreshInterval: 100 });
+  useEffect(() => {
+    if (datapendiente) {
+      setPendiente(datapendiente.length);
+    }
+  }, [datapendiente]);
+
+  const [resuleto, setResulto] = useState(0);
+  const fetcherresuleto = () => axios('/api/resuleto').then(datos => datos.data);
+  const { data:dataresuleto, error:errorresuleto, isLoading:isLoadingresuleto } = useSWR('/api/resuleto', fetcherresuleto, { refreshInterval: 100 });
+  useEffect(() => {
+    if (dataresuleto) {
+      setResulto(dataresuleto.length);
+    }
+  }, [dataresuleto]);
+
+
 
   const [currentEmoji, setCurrentEmoji] = useState('✔️');
 
@@ -76,12 +95,12 @@ const admin = () => {
                            </Link>
                         </div>
                         <div>
-                           <Link href="/listado-areas">
+                           <Link href="/listado-areas-excel">
                               <h3 className="text-base font-normal text-gray-500">Areas</h3>
                            </Link>
                         </div>
                         <div>
-                           <Link href="/listado-maquinase">
+                           <Link href="/listado-maquinas-excel">
                               <h3 className="text-base font-normal text-gray-500">Maquinas</h3>
                            </Link>
                         </div>
@@ -129,11 +148,14 @@ const admin = () => {
                   <div className="flex items-center">
                      <div className="flex-shrink-0">
                         <span className="text-2xl sm:text-3xl leading-none font-bold text-gray-900">Estado</span>
-                        <Link href="/reporte" className="">
-                           <h3 className="text-base font-normal text-gray-500 py-5 pb-1">Pendientes</h3>
+                        <Link href="/reporte-pendiente" className="grid grid-cols-2">
+                           <h3 className="text-base font-normal text-gray-500 py-5 pb-1">Pendientes </h3>
+                           <p className='py-5 pb-1 px-2 text-green-500 font-bold'>{pendiente}</p>
                         </Link>
-                        <Link href="/reporte" className="">
+                        
+                        <Link href="/reporte-resuleto" className="grid grid-cols-2">
                            <h3 className="text-base font-normal text-gray-500">Resueltos</h3>
+                           <p className=' px-2 text-green-500 font-bold'>{resuleto}</p>
                         </Link>
                      </div>
                      <div className="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 font-bold text-2xl">

@@ -1,5 +1,5 @@
 import LayoutAdmin from '../layout/LayoutAdmin'
-import ListadoReporte from '../components/ListadoReporte'
+import ListadoMaquinasExcel from '../components/ListadoMaquinasExcel'
 import useSWR from 'swr'
 import axios from 'axios' 
 import * as XLSX from 'xlsx'; 
@@ -8,31 +8,31 @@ import * as XLSX from 'xlsx';
 
 const reporte = () => {
 
-    const fetcher = () => axios('/api/reportes').then(datos => datos.data)
-    const { data, error, isLoading } = useSWR('/api/reportes',fetcher,{refreshInterval: 100} )
+    const fetcher = () => axios('/api/maquinas').then(datos => datos.data)
+    const { data, error, isLoading } = useSWR('/api/maquinas',fetcher,{refreshInterval: 100} )
 
 
     const exportTo = (orden) => {
         const ws = XLSX.utils.json_to_sheet(orden)
         const wb = XLSX.utils.book_new()
         XLSX.utils.book_append_sheet(wb, ws, 'Listado')
-        XLSX.writeFile(wb, 'listado-reporte.xlsx')
+        XLSX.writeFile(wb, 'listado-maquinas.xlsx')
     }
 
 
   return (
     <>
-    <LayoutAdmin pagina={`Reportes`}>
-        <h1 className="text-2xl font-black text-center py-2">Listado Reportes</h1>
+    <LayoutAdmin pagina={`Areas`}>
+        <h1 className="text-2xl font-black text-center py-2">Listado Maquinas</h1>
         <p className="text-2xl my-5"></p>
         <div className=''>
             {data && data.length ? data.map(reporte =>
                 <div key={reporte.id} className=''>
-                    <ListadoReporte
+                    <ListadoMaquinasExcel
                         reporte={reporte}
                     />
                 </div>
-            ): <p className='text-center'>No Hay Reportes Pendientes</p>}
+            ): <p className='text-center'>No Hay Maquinas</p>}
 
         </div>
         <div  className="text-center m-10">

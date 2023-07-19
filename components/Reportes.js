@@ -1,13 +1,15 @@
 import {formatiarFecha} from "helpers/fecha"
 import useCombustible from '../hooks/useCombustible';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+import { toast } from "react-toastify"
 
 
 
 
 const OrdenGeneral = ({reporte}) => {
 
-    const {id,titulo,createdAt,area,maquina,tipo,enlace} = reporte
+    const {id,titulo,createdAt,area,maquina,tipo,enlace,estado} = reporte
 
     const router = useRouter();
 
@@ -15,6 +17,20 @@ const OrdenGeneral = ({reporte}) => {
       const enlaces = `${enlace}`;
       router.push(enlaces);
     };
+
+    const CambiarEstado = async () => {
+
+        try {
+  
+           await axios.post(`/api/cambiarestado/${id}`)
+            toast.success('...')
+            setTimeout(() =>{
+              router.push('/reporte-resuleto')
+          },1000)
+        } catch (error) {
+            console.log(error)
+        }
+    }
    
   return (
    
@@ -62,6 +78,13 @@ const OrdenGeneral = ({reporte}) => {
                                                                                 <span class="mr-2">Estado</span>
                                                                             </div>
                                                                         </th>
+
+                                                                        <th
+                                                                            class=" py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                                            <div class="flex cursor-pointer">
+                                                                                <span class="mr-2">Resolver</span>
+                                                                            </div>
+                                                                        </th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -91,16 +114,21 @@ const OrdenGeneral = ({reporte}) => {
                                                                         <td
                                                                             class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                                                                             <div class="flex text-green-500">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    class="w-5 h-5 mr-1" fill="none"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    stroke="currentColor">
-                                                                                    <path stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        stroke-width="2"
-                                                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                                </svg>
-                                                                                <p>Activo</p>
+                                                                                <p>{estado ? "Resuleto ✔️" : "Pendiente ❌"}</p>
+                                                                            </div>
+                                                                        </td>
+
+                                                                        <td
+                                                                            class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                                                            <div class="flex text-green-500">
+                                                                                <button
+                                                                                    className=" uppercase font-bold rounded-xl text-right hover:scale-110"
+                                                                                    type="button"
+                                                                                    onClick={CambiarEstado}
+                                                                                >
+                                                                                    👍
+
+                                                                                </button>
                                                                             </div>
                                                                         </td>
                                                                         
@@ -115,6 +143,8 @@ const OrdenGeneral = ({reporte}) => {
                                     </div>
                                 </div>
                             </div>
+
+                            
                       
     </>
   )
